@@ -1,7 +1,7 @@
 version: '2'
 services:
   sa_bank_ss_db:
-    image: mysql
+    image: mysql:5.7.22
     ports:
       - "3308:3306"
     environment:
@@ -11,7 +11,7 @@ services:
       MYSQL_DATABASE: sa_bank_ss_dev
       MYSQL_HOST: sa_bank_ss_db
   sa_bank_ss:
-    build: .
+    image: lacardenasv/interopbty-sa_bank_ms
     command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
